@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <%= t.include("partials/_head.html", grunt.data.json) %>
+    <% if (json.project.production && !json.project.embedded) { %>
+      <%= t.include("partials/_dataLayer.html") %>
+      <%= t.include("partials/_gtm.html") %>
+    <% } %>
+    <script src="https://kit.fontawesome.com/9d53be7224.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <% if (json.project.production && !json.project.embedded) { %>
+      <%= t.include("partials/_gtmNoScript.html") %>
+    <% } %>
+    <responsive-child>
+      <main class="interactive" id="pieGraphic">
+            <h1 class="graphic-hed">Who pays for higher education in Washington?</h1>
+            <p class="graphic-chatter">Over the last 20 years, as state appropriations for higher education went down, tuition rates increased.
+              The numbers in these charts have been adjusted for inflation and rounded to the nearest thousand.</p>
+
+
+
+
+
+
+
+
+            <div class="CountyTrends" id="treeChart"></div>
+            <!-- <div class="counter">
+              <div class="head"><div class="title cases showMe">Cases by county</div><div class="title deaths">Deaths by county</div><span class="date"></span></div>
+              <div class="body">
+              </div>
+            </div> -->
+
+
+
+            <div class="caption-container">
+              <p class="data-source">Source: </p>
+              <p class="art-credit">Lauren Flannery / The Seattle Times</p>
+            </div>
+          </main>
+        </responsive-child>
+    </responsive-child>
+
+    <script src="app.js" async></script>
+    <% if (json.project.production) { %>
+    <%= !json.project.embedded ? t.include("partials/_analytics.html") : "" %>
+    <%= t.include("partials/_workHere.html") %>
+    <% } %>
+  </body>
+</html>

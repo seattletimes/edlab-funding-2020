@@ -12,20 +12,29 @@
   left: 0;
   right: 0;
   font-size: 4em;
-  color: @df-blue;
+
   transition: .3s ease;
   line-height: 0;
 
+
   div {
     display: inline-block;
-    // padding: 0 10px;
+    background-color: black;
+    color: white;
+    font-size: 0.6em;
+    padding: 6px 40px;
+    border-radius: 9px;
 
     i {
       line-height: 0.6em;
     }
 
     .fa-caret-left {
-      visibility: hidden;
+      opacity: 0.5;
+      margin-left: -0.15em;
+    }
+    .fa-caret-right {
+      margin-right: -0.15em;
     }
   }
 }
@@ -34,6 +43,16 @@
   transform: scale(1.1,1.1);
   opacity: 1;
   cursor: pointer;
+}
+
+.textLabel {
+  font-size: 17px;
+  font-weight: bold;
+
+  @media @mobile {
+    font-size: 14px;
+    transform: translate(-22px, 0);
+  }
 }
 
 .stepper {
@@ -45,6 +64,32 @@
   // text-align: center;
 }
 
+.y {
+  font-size: 14px;
+  .domain { display: none; }
+}
+
+.x {
+  font-size: 14px;
+  line { display: none; }
+
+  .tick { display: none; }
+
+
+  .tick:nth-child(even) {
+  display: inherit;
+    @media @mobile {
+      display: none;
+    }
+  }
+
+.tick:nth-child(5n) {
+    @media @mobile {
+      display: inherit;
+    }
+  }
+}
+
 
 .slide {
   display: none;
@@ -52,12 +97,14 @@
 
 .eachKey {
   display: inline-block;
+  font-size: 0.9em;
+  margin-right: 10px;
 
   .color {
     width: 20px;
     height: 20px;
     display: inline-block;
-    margin-right: 5px;
+    vertical-align: text-top;
   }
 }
 
@@ -76,3 +123,77 @@
     fill: #ccc;
   }
 }
+
+
+////////////
+
+#chart {
+	  max-width: 100%;
+	  overflow:auto;
+	}
+	text {
+	  pointer-events: none;
+	}
+	.grandparent text {
+	  font-weight: bold;
+	}
+	rect {
+	  stroke: #fff;
+	  stroke-width: 1px;
+	}
+	rect.parent,
+	.grandparent rect {
+	  stroke-width: 3px;
+	}
+	.grandparent:hover rect {
+	  fill: grey;
+	}
+	.children rect.parent,
+	.grandparent rect {
+	  cursor: pointer;
+	}
+	.children rect.child {
+	  opacity: 0;
+	}
+	.children rect.parent {
+	}
+	// .children:hover rect.child {
+	//   opacity: 1;
+	//   stroke-width: 1px;
+	// }
+	// .children:hover rect.parent {
+	//   opacity: 0;
+	// }
+	.legend {
+	  margin-bottom:8px !important;
+	}
+	.legend rect {
+	  stroke-width: 0px;
+	}
+	.legend text {
+	  text-anchor: middle;
+	  pointer-events: auto;
+	  font-size: 13px;
+	  font-family: sans-serif;
+	  fill: black;
+	}
+	.form-group {
+	    text-align:left;
+	}
+	.textdiv {
+	    font-family: @df-sans;
+	    font-size: 14px;
+	    padding: 7px;
+	    cursor: pointer;
+	    overflow:none;
+	}
+	.textdiv .title {
+	    font-weight: bold;
+      font-size: 1em;
+      margin: 0;
+
+	}
+	.textdiv p{
+    font-size: 1em;
+    margin: 0;
+	}

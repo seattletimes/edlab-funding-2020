@@ -1,0 +1,93 @@
+{
+  "name": "State budget",
+  "rate": 0.03,
+  "children": [
+    {
+      "name": "Legislative",
+      "rate": -0.01,
+      "value": 194153000
+    },
+    {
+      "name": "Judicial",
+      "rate": -0.05,
+      "value": 340797000
+    },
+    {
+      "name": "Governmental Operations",
+      "rate": 0.02,
+      "value": 766204000
+    },
+    {
+      "name": "Other Human Services",
+      "rate": 0.05,
+      "value":10637039000
+    },
+    {
+      "name": "DSHS",
+      "rate": 0.05,
+      "value":6469997000
+    },
+    {
+      "name": "Natural Resources",
+      "rate": 0.03,
+      "value": 500460000
+    },
+    {
+      "name": "Transportation",
+      "rate": 0.03,
+      "value": 126118000
+    },
+    {
+      "name": "Special Appropriations",
+      "rate": 0.03,
+      "value": 2900277000
+    },
+    {
+      "name": "Education",
+      "rate": 0.03,
+      "special": "green",
+      "children": [
+        {
+          "name": "K-12 Basic Education",
+          "rate": -0.02,
+          "special": "blue",
+          "value": 26122597000
+        },
+        {
+          "name": "Other K-12 Flexible",
+          "rate": 0.07,
+          "special": "blue",
+          "value": 1125612000
+        },
+        {
+          "name": "Other Education",
+          "rate": 0.07,
+          "special": "blue",
+          "value": 11320000
+        },
+        {
+          "name": "Higher Education",
+          "rate": 0.01,
+          "special": "green",
+          "children": [
+            {
+              "name": "4-years",
+              "rate": 0.01,
+              "value": 1927619000
+            },
+            {
+              "name": "CC/tech colleges",
+              "rate": 0.01,
+              "value": 1760490000
+            },
+            {
+              "name": "Student Achievement Council",
+              "rate": 0,
+              "value": 939105000
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
