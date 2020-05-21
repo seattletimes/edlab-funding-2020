@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <%= t.include("partials/_head.html", grunt.data.json) %>
+    <% if (json.project.production && !json.project.embedded) { %>
+      <%= t.include("partials/_dataLayer.html") %>
+      <%= t.include("partials/_gtm.html") %>
+    <% } %>
+    <script src="https://kit.fontawesome.com/9d53be7224.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <% if (json.project.production && !json.project.embedded) { %>
+      <%= t.include("partials/_gtmNoScript.html") %>
+    <% } %>
+    <responsive-child>
+      <main class="interactive" id="countyTrendGraphic">
+            <h1 class="graphic-hed">Who pays for higher education in Washington?</h1>
+            <p class="graphic-chatter">Over the last 20 years, as state appropriations for higher education went down, tuition rates increased.
+              The numbers in these charts have been adjusted for inflation.</p>
+
+
+
+
+              <div class="stepper">
+
+                <div class="slide" data-slide="1">
+                  Washington colleges and universities have steadily collected more in tuition revenue over the
+                  last 20 years, but the amount they charged escalated sharply after the Great Recession as schools
+                  tried to make up for cuts in state appropriations. After a few years of double-digit tuition hikes,
+                  lawmakers put the brakes on the price of going to college in 2014, and capped the amount tuition
+                  could rise. These numbers also reflect an increase in full-time-equivalent enrollment of about 34%
+                  between 2000 and 2018. More students mean more tuition is collected.
+                </div>
+
+                <div class="slide" data-slide="2">
+                  Tuition went up after the 2008 recession to fill in for steep cuts in state appropriations.
+                  As the economic recovery took off, about five years ago, state legislators became more generous
+                  in their funding for colleges and universities.
+                </div>
+
+                <div class="slide" data-slide="3">
+                  Before the Great Recession, Washington’s public colleges and universities received the lion’s
+                  share of their funding from the state. Today, the majority of their funds come from tuition.
+                  If state legislators respond as they did in the 2008 recession and take a big chunk out of college
+                  funding to balance the budget, some colleges fear they won’t be able to make up the difference,
+                  especially if enrollments drop.
+                </div>
+
+                  <div class="icon">
+                    <div><i class="fas fa-caret-left"></i></div>
+                    <div><i class="fas fa-caret-right"></i></div>
+                  </div>
+
+              </div>
+
+
+            <div class="key">
+              <div class="eachKey">
+                <div class="color" style="background-color:rgb(12, 88, 125);"></div> Tuition Revenue
+              </div>
+              <div class="eachKey">
+                <div class="color" style="background-color:rgb(208, 141, 68);"></div> State Revenue
+              </div>
+              <!-- <div class="eachKey">
+                <div class="color" style="background-color:goldenrod;"></div> Financial Aid
+              </div> -->
+            </div>
+
+
+
+            <div class="CountyTrends" id="barChart"></div>
+            <!-- <div class="counter">
+              <div class="head"><div class="title cases showMe">Cases by county</div><div class="title deaths">Deaths by county</div><span class="date"></span></div>
+              <div class="body">
+              </div>
+            </div> -->
+
+
+
+            <div class="caption-container">
+              <p class="data-source">Source: </p>
+              <p class="art-credit">Lauren Flannery / The Seattle Times</p>
+            </div>
+          </main>
+        </responsive-child>
+    </responsive-child>
+
+    <script src="app.js" async></script>
+    <% if (json.project.production) { %>
+    <%= !json.project.embedded ? t.include("partials/_analytics.html") : "" %>
+    <%= t.include("partials/_workHere.html") %>
+    <% } %>
+  </body>
+</html>
