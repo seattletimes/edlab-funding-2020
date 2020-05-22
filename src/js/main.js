@@ -246,13 +246,13 @@ var myFunction = function(updateData, idClicked) {
              .attr("x", 0)
              .attr("y", conHeight - margin.bottom)
              .attr("transform", function(d) {
-                return "translate(" + x0(d.Year) + "," + -6 + ")";
+                return "translate(" + (x0(d.Year) - 20) + "," + -6 + ")";
              })
              .attr("dy", ".7em")
              .style("font-size","14px")
              .style("text-anchor", "start")
              .style("font-weight","bold")
-             .text("U.S. Recession");
+             .text("U.S. recession");
 
 
 
@@ -273,13 +273,13 @@ var myFunction = function(updateData, idClicked) {
 $('*[data-slide="1"]').show();
 
 
- $( ".icon i" ).click(function() {
+ $( ".icon div" ).click(function() {
    var currentNum = $('.stepper').find(".slide:visible").attr("data-slide");
 
    console.log(currentNum);
 
 
-   if ( $( this ).hasClass( "fa-caret-right" ) ) {
+   if ( $( this ).find('i').hasClass( "fa-caret-right" ) ) {
      $('.fa-caret-right').css("opacity",1);
      $('.fa-caret-left').css("opacity",0.5);
      mightySwitch( (parseInt(currentNum) + 1) );
@@ -362,11 +362,13 @@ $('*[data-slide="1"]').show();
 
 if($('#pieGraphic').length >0 ){
 
+  //http://bl.ocks.org/guglielmo/16d880a6615da7f502116220cb551498
+
   var el_id = 'treeChart';
         var obj = document.getElementById(el_id);
         var divWidth = obj.offsetWidth;
         var margin = {top: 30, right: 0, bottom: 20, left: 0},
-            width = divWidth -25,
+            width = divWidth,
             height = 600 - margin.top - margin.bottom,
             formatNumber = d3.format(","),
             transitioning;
@@ -412,7 +414,7 @@ if($('#pieGraphic').length >0 ){
                     return d.value;
                 })
                 .sort(function (a, b) {
-                    return b.height - a.height || b.value - a.value
+                    return b.width - a.width || b.value - a.value
                 })
             );
             display(root);
@@ -421,7 +423,7 @@ if($('#pieGraphic').length >0 ){
                 // and activate click's handler
                 grandparent
                     .datum(d.parent)
-                    .on("click", transition)
+                    .on("click", transitionOut)
                     .select("text")
                     .text(name(d));
                 // grandparent color
@@ -466,8 +468,20 @@ if($('#pieGraphic').length >0 ){
                     .append("xhtml:div")
                     .attr("dy", ".75em")
                     .html(function (d) {
-                        return '' +
-                            '<p class="title"> ' + d.data.name + '</p>' +
+                      var str = d.data.name;
+                      var res = str.split("|");
+                      var dataName = "";
+
+                      for (var i = 0; i < res.length; i++) {
+                        dataName = dataName + '<p class="title"> ' + res[i] + '</p>';
+                      }
+
+                      var label;
+                      if (d.data.label) {
+                        label = '<p class="label">' + d.data.label + '</p>';
+                      } else { label = ''}
+
+                        return '' + dataName + label +
                             '<p>' + "$" + formatNumber(d.value) + '</p>'
                         ;
                     })
@@ -475,12 +489,14 @@ if($('#pieGraphic').length >0 ){
                 function transition(d) {
                     if (transitioning || !d) return;
                     transitioning = true;
+
+
                     var g2 = display(d),
                         t1 = g1.transition().duration(650),
                         t2 = g2.transition().duration(650);
                     // Update the domain only after entering new elements.
-                    x.domain([d.x0, d.x1]);
-                    y.domain([d.y0, d.y1]);
+                    // x.domain([d.x0, d.x1]);
+                    // y.domain([d.y0, d.y1]);
                     // Enable anti-aliasing during the transition.
                     svg.style("shape-rendering", null);
                     // Draw child nodes on top of parent nodes.
@@ -494,8 +510,54 @@ if($('#pieGraphic').length >0 ){
                     // Transition to the new view.
                     t1.selectAll("text").call(text).style("fill-opacity", 0);
                     t2.selectAll("text").call(text).style("fill-opacity", 1);
-                    t1.selectAll("rect").call(rect);
+                    // t1.selectAll("rect").call(rect);
                     t2.selectAll("rect").call(rect);
+                    /* Foreign object */
+                    // t1.selectAll(".textdiv").style("display", "none");
+                    /* added */
+                    // t1.selectAll(".foreignobj").call(foreign);
+                    /* added */
+                    t2.selectAll(".textdiv").style("display", "block");
+                    /* added */
+                    t2.selectAll(".foreignobj").call(foreign);
+                    /* added */
+                    // Remove the old node when the transition is finished.
+                    t1.on("end.remove", function(){
+                      // console.log(this);
+                        // this.remove();
+                        // svg.selectAll(".depth").sort(function (a, b) {
+                        //     return b.depth - a.depth;
+                        // });
+                        transitioning = false;
+                    });
+                }
+                function transitionOut(d) {
+                    if (transitioning || !d) return;
+                    transitioning = true;
+
+                    // console.log(g1);
+
+                    var g2 = display(d),
+                        t1 = g1.transition().duration(650),
+                        t2 = g2.transition().duration(650);
+                    // Update the domain only after entering new elements.
+                    // x.domain([d.x0, d.x1]);
+                    // y.domain([d.y0, d.y1]);
+                    // Enable anti-aliasing during the transition.
+                    svg.style("shape-rendering", null);
+                    // Draw child nodes on top of parent nodes.
+                    // svg.selectAll(".depth").sort(function (a, b) {
+                    //     return a.depth - b.depth;
+                    // });
+                    // Fade-in entering text.
+                    g2.selectAll("text").style("fill-opacity", 0);
+                    g2.selectAll("foreignObject div").style("display", "none");
+                    /*added*/
+                    // Transition to the new view.
+                    // t1.selectAll("text").call(text).style("fill-opacity", 0);
+                    // t2.selectAll("text").call(text).style("fill-opacity", 1);
+                    // t1.selectAll("rect").call(rect);
+                    // t2.selectAll("rect").call(rect);
                     /* Foreign object */
                     t1.selectAll(".textdiv").style("display", "none");
                     /* added */
@@ -506,8 +568,13 @@ if($('#pieGraphic').length >0 ){
                     t2.selectAll(".foreignobj").call(foreign);
                     /* added */
                     // Remove the old node when the transition is finished.
+
                     t1.on("end.remove", function(){
+                      console.log(t2);
                         this.remove();
+                        // svg.selectAll(".depth").sort(function (a, b) {
+                        //     return b.depth - a.depth;
+                        // });
                         transitioning = false;
                     });
                 }
@@ -560,7 +627,7 @@ if($('#pieGraphic').length >0 ){
             function name(d) {
                 return breadcrumbs(d) +
                     (d.parent
-                    ? " -  Click to zoom out"
+                    ? " -  Click here to zoom out"
                     : " - Click inside green squares to zoom in");
             }
             function breadcrumbs(d) {
