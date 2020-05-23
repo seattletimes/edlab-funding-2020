@@ -10,31 +10,36 @@
     {
       "name": "Education (K-12 and higher education)",
       "rate": 0.03,
-      "special": "green",
+      "clickable": "yes",
+      "special": "#6dbaaf",
       "children": [
         {
-          "name": "Education constitutionally mandated costs",
+          "name": "Constitutionally mandated education costs",
           "rate": -0.02,
-          "special": "#bfe6eb",
+          "special": "rgb(204, 184, 199)",
           "label": "K-12 Basic Education",
           "value": 26122597000
         },
         {
-          "name": "Education cuttable costs",
+          "name": "Cuttable education costs",
           "rate": -0.02,
-          "special": "green",
+          "clickable": "yes",
+          "special": "#6dbaaf",
+          "lopVal": "5.2 billion",
           "children": [
             {
-              "name": "Other K-12 Flexible",
+              "name": "Other education costs",
               "rate": 0.07,
-              "special": "#bfe6eb",
-              "value": 1136932000
+              "special": "rgb(255, 241, 246)",
+              "value": 1136932000,
+              "lopVal": "1.1 billion"
             },
             {
               "name": "Higher Education",
               "rate": 0.01,
-              "special": "#bfe6eb",
-              "value": 4051203000
+              "special": "rgb(255, 241, 246)",
+              "value": 4051203000,
+              "lopVal": "4.1 billion"
             }
           ]
         }
